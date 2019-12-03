@@ -130,6 +130,10 @@
                     "name": "OPENSHIFT_ENABLE_OAUTH",
                     "value": "${ENABLE_OAUTH}"
                   },
+		  {
+                    "name": "INSTALL_PLUGINS",
+                    "value": "${INSTALL_PLUGINS}"
+                  },
                   {
                     "name": "OPENSHIFT_ENABLE_REDIRECT_PROMPT",
                     "value": "true"
@@ -287,6 +291,24 @@
       "displayName": "Jenkins JNLP Service Name",
       "description": "The name of the service used for master/slave communication.",
       "value": "jenkins-jnlp"
+    },
+    {
+      "name": "INSTALL_PLUGINS",
+      "displayName": "Add additional pluging",
+      "description": "Comma-separated list of additional plugins to install on startup. The format of each plugin spec is plugin-id:version (as in plugins.txt)",
+      "value": ""
+    },
+    {
+      "name": "OVERRIDE_PV_CONFIG_WITH_IMAGE_CONFIG",
+      "displayName": "Override PV Config with image config",
+      "description": "When running this image with an OpenShift persistent volume for the Jenkins config directory, the transfer of configuration from the image to the persistent volume is only done the first startup of the image as the persistent volume is assigned by the persistent volume claim creation. If you create a custom image that extends this image and updates configuration in the custom image after the initial startup, by default it will not be copied over, unless you set this environment variable to some non-empty value.",
+      "value": ""
+    },
+    {
+      "name": "OVERRIDE_PV_PLUGINS_WITH_IMAGE_PLUGINS",
+      "displayName": "Override PV Plugin with image plugins",
+      "description": "When running this image with an OpenShift persistent volume for the Jenkins config directory, the transfer of plugins from the image to the persistent volume is only done the first startup of the image as the persistent volume is assigned by the persistent volume claim creation. If you create a custom image that extends this image and updates plugins in the custom image after the initial startup, by default they will not be copied over, unless you set this environment variable to some non-empty value.",
+      "value": ""
     },
     {
       "name": "ENABLE_OAUTH",
