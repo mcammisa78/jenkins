@@ -113,6 +113,10 @@
                     "name": "OPENSHIFT_ENABLE_OAUTH",
                     "value": "${ENABLE_OAUTH}"
                   },
+		  {
+                    "name": "INSTALL_PLUGINS",
+                    "value": "${INSTALL_PLUGINS}"
+                  },
                   {
                     "name": "OPENSHIFT_ENABLE_REDIRECT_PROMPT",
                     "value": "true"
@@ -298,6 +302,12 @@
       "displayName": "Jenkins JNLP Service Name",
       "description": "The name of the service used for master/slave communication.",
       "value": "jenkins-jnlp"
+    },
+    {
+      "name": "INSTALL_PLUGINS",
+      "displayName": "Add additional pluging",
+      "description": "Comma-separated list of additional plugins to install on startup. The format of each plugin spec is plugin-id:version (as in plugins.txt)",
+      "value": ""
     },
     {
       "name": "ENABLE_OAUTH",
