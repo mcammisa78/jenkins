@@ -1,0 +1,127 @@
+jenkins:
+  agentProtocols:
+  - "JNLP4-connect"
+  - "Ping"
+  clouds:
+  - kubernetes:
+      addMasterProxyEnvVars: true
+      containerCapStr: "100"
+      credentialsId: "1a12dfa4-7fc5-47a7-aa17-cc56572a41c7"
+      jenkinsTunnel: "172.30.38.213:50000"
+      jenkinsUrl: "http://172.30.223.239:80"
+      maxRequestsPerHostStr: "32"
+      name: "openshift"
+      namespace: "myproject"
+      serverCertificate: |-
+        -----BEGIN CERTIFICATE-----
+        MIIC6jCCAdKgAwIBAgIBATANBgkqhkiG9w0BAQsFADAmMSQwIgYDVQQDDBtvcGVu
+        c2hpZnQtc2lnbmVyQDE1Nzg1MDM3MDQwHhcNMjAwMTA4MTcxNTAzWhcNMjUwMTA2
+        MTcxNTA0WjAmMSQwIgYDVQQDDBtvcGVuc2hpZnQtc2lnbmVyQDE1Nzg1MDM3MDQw
+        ggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDioyz6EOge1T4oZFmKLatD
+        3HNLo7Z/RBjoDX4nUW27Tw/JVyBy3SDn3Wg4oJlzl8Nu2WnYA+n8wzjA6owYDo3p
+        bqx0FzZv0DEkSQs1bV2EpL7WBqB5/n7wuNcf0t7K9GTZL4TgOYvnG05F8ax92LRp
+        urxL+99HpaRxqdklXWDEFF7nMFhDG0TkKQbtLN61/mOciHywA/qJJeceEPqlpZrV
+        xXFbRwMLEKh/KcfQx6yzg3Z+6vAed28iXkzeo+2qq+FfOzvObMEIt+DsSrma2wMr
+        0ZcJ/QbkGG3A9ifeoJj6AlMh5JAMBJw/27d+mLhGZJCxydZf4m+vT47El6G2aXjb
+        AgMBAAGjIzAhMA4GA1UdDwEB/wQEAwICpDAPBgNVHRMBAf8EBTADAQH/MA0GCSqG
+        SIb3DQEBCwUAA4IBAQCNASi5Rlwj5JUUi5wZI0DTutjY3FDD+YV9q64H1dMY54QN
+        zaVOfdT2qspv2ecPsFBlKl006CPaswl2A20SkFQL1zZNihO0yK6nVdVLFv3gpMea
+        lIUagteSZe1McptKO6izgoUENFrJ7moH6Px9KJV3IThNHP5is2PVsZvaHKpL3j6N
+        vZ/VzfOLdaAYv+M9Y0cHwGasAWbgjZf5XwlsSpYBjKp1ehDSjZZcV3fihn0rn3TP
+        MF1Nvy9SNSlFH8EU7DLcdOKNjYqJpg6ptICMMP+ogrridoK3pt2sUm1KYSUjI8/N
+        syQ1jjy0bt8LV994SVBg5XTPUqJNJugWLrwGRg7/
+        -----END CERTIFICATE-----
+      serverUrl: "https://172.30.0.1:443"
+      templates:
+      - containers:
+        - alwaysPullImage: true
+          args: "^${computer.jnlpmac} ^${computer.name}"
+          image: "docker.io/openshift/jenkins-poste-agent-maven-35-centos7:v3.11"
+          name: "jnlp"
+          workingDir: "/tmp"
+        label: "maven"
+        name: "maven"
+        serviceAccount: "jenkins"
+        slaveConnectTimeoutStr: "0"
+      - containers:
+        - alwaysPullImage: true
+          args: "^${computer.jnlpmac} ^${computer.name}"
+          image: "docker.io/openshift/jenkins-poste-agent-nodejs-8-centos7:v3.11"
+          name: "jnlp"
+          workingDir: "/tmp"
+        label: "nodejs"
+        name: "nodejs"
+        serviceAccount: "jenkins"
+        slaveConnectTimeoutStr: "0"
+  crumbIssuer:
+    standard:
+      excludeClientIPFromCrumb: true
+  disableRememberMe: false
+  labelString: "master"
+  markupFormatter: "plainText"
+  mode: NORMAL
+  myViewsTabBar: "standard"
+  numExecutors: 5
+  primaryView:
+    all:
+      name: "all"
+  projectNamingStrategy: "standard"
+  quietPeriod: 1
+  remotingSecurity:
+    enabled: true
+  scmCheckoutRetryCount: 0
+  securityRealm: "openShiftOAuth2"
+  slaveAgentPort: 50000
+  updateCenter:
+    sites:
+    - id: "default"
+      url: "https://updates.jenkins.io/update-center.json"
+  views:
+  - all:
+      name: "all"
+  viewsTabBar: "standard"
+security:
+  apiToken:
+    creationOfLegacyTokenEnabled: false
+    tokenGenerationOnCreationEnabled: false
+    usageStatisticsEnabled: true
+  downloadSettings:
+    useBrowser: false
+  globalJobDslSecurityConfiguration:
+    useScriptSecurity: true
+  sSHD:
+    port: -1
+unclassified:
+  bitbucketEndpointConfiguration:
+    endpoints:
+    - bitbucketCloudEndpoint:
+        enableCache: false
+        manageHooks: false
+        repositoriesCacheDuration: 0
+        teamCacheDuration: 0
+  gitHubPluginConfig:
+    hookUrl: "https://jenkins-myproject.172.23.173.211.nip.io/github-webhook/"
+  gitSCM:
+    createAccountBasedOnEmail: false
+  globalPluginConfiguration:
+    buildConfigListInterval: 300
+    buildListInterval: 300
+    configMapListInterval: 300
+    enabled: true
+    foldersEnabled: true
+    imageStreamListInterval: 300
+    namespace: "myproject"
+    secretListInterval: 300
+  location:
+    adminAddress: "Indirizzo non ancora configurato <nobody@nowhere>"
+  mailer:
+    adminAddress: "Indirizzo non ancora configurato <nobody@nowhere>"
+    charset: "UTF-8"
+    useSsl: false
+  pollSCM:
+    pollingThreadCount: 10
+tool:
+  git:
+    installations:
+    - home: "git"
+      name: "Default"
